@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work — Selected Projects</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #08080a;
+      --surface: #121216;
+      --border: #1e1e24;
+      --border-hi: #2e2e38;
+      --text: #f4f4f6;
+      --text-mid: #a1a1ac;
+      --text-dim: #6b6b76;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 6rem 2rem 4rem;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+    }
+
+    .container { max-width: 1320px; margin: 0 auto; }
+
+    /* ---------- header ---------- */
+    .header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      padding-bottom: 2rem;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .header-left .meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 1.1rem;
+    }
+
+    .header-left .meta .dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--text-dim);
+    }
+
+    .header-left h1 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 600;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+
+    .header-left h1 span { color: var(--text-dim); font-weight: 400; }
+
+    .header-left p {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      max-width: 420px;
+      line-height: 1.55;
+    }
+
+    .count {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 2rem;
+      background: var(--surface);
+      font-size: 0.82rem;
+      color: var(--text-dim);
+    }
+    .count strong { color: var(--text); font-weight: 600; }
+
+    /* ---------- grid ---------- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem 1.5rem;
+    }
+
+    /* ---------- card ---------- */
+    .card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    .card-media {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: border-color 0.3s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .card:hover .card-media {
+      border-color: var(--border-hi);
+      transform: translateY(-4px);
+    }
+
+    .card-media img,
+    .card-media video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-media img {
+      z-index: 1;
+      transition: opacity 0.4s ease;
+    }
+
+    .card-media video {
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .card:hover .card-media video { opacity: 1; }
+    .card:hover .card-media img   { opacity: 0; }
+
+    /* arrow badge top-right */
+    .card-media::after {
+      content: '';
+      position: absolute;
+      top: 0.9rem;
+      right: 0.9rem;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.92);
+      z-index: 3;
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='7' y1='17' x2='17' y2='7'/%3E%3Cpolyline points='7 7 17 7 17 17'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      pointer-events: none;
+    }
+
+    .card:hover .card-media::after { opacity: 1; transform: scale(1); }
+
+    /* ---------- text below card ---------- */
+    .card-info {
+      padding-top: 1rem;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .card-info h3 {
+      font-size: 0.98rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .card-info .category {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+    }
+
+    /* ---------- footer ---------- */
+    .footer {
+      margin-top: 5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+    }
+
+    .footer a {
+      color: var(--text-mid);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer a:hover { color: var(--text); }
+    .footer a svg { transition: transform 0.2s ease; }
+    .footer a:hover svg { transform: translateX(-3px); }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 900px) {
+      body { padding: 4rem 1.5rem 3rem; }
+      .grid { grid-template-columns: repeat(2, 1fr); gap: 2rem 1.25rem; }
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 3rem 1.25rem 2.5rem; }
+      .grid { grid-template-columns: 1fr; gap: 2rem; }
+      .header-left h1 { font-size: 1.6rem; }
+      .count { display: none; }
+      .card-info { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+      .footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="header">
+    <div class="header-left">
+      <div class="meta">
+        Portfolio <span class="dot"></span> 2022 – 2025
+      </div>
+      <h1>Selected Work</h1>
+      <p>A collection of websites and projects I've designed and built. Hover any card to preview it live.</p>
+    </div>
+    <span class="count"><strong>06</strong> projects</span>
+  </header>
+
+  <div class="grid">
+
+    <a href="https://notion.so" class="card" target="_blank" rel="noopener noreferrer">
+      <div class="card-media">
+        <img src="imageProfile.jpg" alt="Notion Calendar">
+        <video src="japan.mp4" muted loop playsinline preload="metadata"></video>
+      </div>
+      <div class="card-info">
+        <h3>Notion Calendar</h3>
+        <span class="category">Toolmaking</span>
+      </div>
+    </a>
+
+    <a href="#" class="card" target="_blank" rel="noopener noreferrer">
+      <div class="card-media">
+        <img src="imageProfile.jpg" alt="Multimodal Search">
+        <video src="japan.mp4" muted loop playsinline preload="metadata"></video>
+      </div>
+      <div class="card-info">
+        <h3>Multimodal Search</h3>
+        <span class="category">Brain Tech</span>
+      </div>
+    </a>
+
+    <a href="https://apple.com" class="card" target="_blank" rel="noopener noreferrer">
+      <div class="card-media">
+        <img src="imageProfile.jpg" alt="Apple">
+        <video src="japan.mp4" muted loop playsinline preload="metadata"></video>
+      </div>
+      <div class="card-info">
+        <h3>Apple</h3>
+        <span class="category">Conversational AI</span>
+      </div>
+    </a>
+
+    <a href="#" class="card" target="_blank" rel="noopener noreferrer">
+      <div class="card-media">
+        <img src="imageProfile.jpg" alt="Azuki">
+        <video src="japan.mp4" muted loop playsinline preload="metadata"></video>
+      </div>
+      <div class="card-info">
+        <h3>Azuki</h3>
+        <span class="category">Brand Identity</span>
+      </div>
+    </a>
+
+    <a href="#" class="card" target="_blank" rel="noopener noreferrer">
+      <div class="card-media">
+        <img src="imageProfile.jpg" alt="Unstoppable">
+        <video src="japan.mp4" muted loop playsinline preload="metadata"></video>
+      </div>
+      <div class="card-info">
+        <h3>Unstoppable</h3>
+        <span class="category">Web3 Identity</span>
+      </div>
+    </a>
+
+    <a href="#" class="card" target="_blank" rel="noopener noreferrer">
+      <div class="card-media">
+        <img src="imageProfile.jpg" alt="Circle">
+        <video src="japan.mp4" muted loop playsinline preload="metadata"></video>
+      </div>
+      <div class="card-info">
+        <h3>Circle</h3>
+        <span class="category">Fintech</span>
+      </div>
+    </a>
+
+  </div>
+
+  <footer class="footer">
+    <a href="#" onclick="history.back(); return false;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Back to main page
+    </a>
+    <span>© 2025 — All rights reserved</span>
+  </footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.card').forEach(card => {
+    const video = card.querySelector('video');
+    if (!video) return;
+
+    card.addEventListener('mouseenter', () => {
+      video.play();
+    });
+
+    card.addEventListener('mouseleave', () => {
+      video.pause();
+      video.currentTime = 0;
+    });
+  });
+</script>
+
+</body>
+</html>
